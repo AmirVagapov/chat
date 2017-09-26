@@ -125,7 +125,6 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
                         chatWindow.append(WRONG_USERNAME + "\n" + NEW_CONNECT);
                 }
             }catch (Exception e){
-
             }
         }
     }
