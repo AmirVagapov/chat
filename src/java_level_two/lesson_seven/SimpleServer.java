@@ -19,11 +19,11 @@ import java.util.*;
  */
 public class SimpleServer implements IConstants{
 
-    int count;
-    ServerSocket server;
-    Socket socket;
-    static HashMap<String, Socket> hm = new HashMap<>();
-    List<ClientHandler> clients;
+    private int count;
+    private ServerSocket server;
+    private Socket socket;
+    private static HashMap<String, Socket> hm = new HashMap<>();
+    private List<ClientHandler> clients;
 
     public static void main(String[] args) {
         new SimpleServer();
@@ -208,8 +208,7 @@ public class SimpleServer implements IConstants{
                             } else {
                                 System.out.println(name + ": " + AUTH_FAIL);
                                 sendMsg(AUTH_FAIL);
-                                break;
-                                //message = EXIT_COMMAND;
+                                this.socket.close();
                             }
                         }else if(message.startsWith(CREATE)){
                             String[] logAndPass = message.split(" ");
@@ -222,7 +221,7 @@ public class SimpleServer implements IConstants{
                             }else{
                                 System.out.println("'" + name + "' " + WRONG_USERNAME);
                                 sendMsg(WRONG_USERNAME);
-                                break;
+                                this.socket.close();
                             }
                         } else if(message.contains("/w")){
                             String array[] = message.split(" ");
