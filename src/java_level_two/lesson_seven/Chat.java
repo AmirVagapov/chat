@@ -137,7 +137,6 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
             writer.flush();
             enterText.setText("");
             enterText.requestFocusInWindow();
-
         }
     }
 
@@ -159,7 +158,6 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
         try {
             BufferedReader reader = new BufferedReader(new FileReader("History.txt"));
             String line;
-            ArrayList<String> lines = new ArrayList<>();
             while((line = reader.readLine()) != null){
                 chatWindow.append(line + "\n");
             }
