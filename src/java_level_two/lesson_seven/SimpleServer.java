@@ -143,7 +143,7 @@ public class SimpleServer implements IConstants{
     }
 
     //отправка сообщений всем пользователям
-    void broadcastMessage(String msg){
+    private void broadcastMessage(String msg){
 
         for(ClientHandler client : clients)
             client.sendMsg(msg);
@@ -151,7 +151,7 @@ public class SimpleServer implements IConstants{
     /**
      * ClientHandler: service requests of clients
      */
-    public class ClientHandler implements Runnable {
+    class ClientHandler implements Runnable {
         BufferedReader reader;
         PrintWriter writer;
         Socket socket;
@@ -169,7 +169,7 @@ public class SimpleServer implements IConstants{
             }
         }
 
-        void sendMsg(String msg){
+        private void sendMsg(String msg){
             try{
                 writer.println(msg);
                 writer.flush();
@@ -178,7 +178,7 @@ public class SimpleServer implements IConstants{
         }
 
         ////метод отправляет сообщение другому пользователю
-        void sendMessageToAnotherUser(Socket clientSocket, String mess, String name){
+        private void sendMessageToAnotherUser(Socket clientSocket, String mess, String name){
             try {
                 writer = new PrintWriter(clientSocket.getOutputStream());
                 writer.println("'PRIVATE MSG FROM ' " + name + ":" + mess);

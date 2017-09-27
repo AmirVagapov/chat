@@ -17,23 +17,23 @@ import java.util.Locale;
  */
 public class Chat extends JFrame implements ActionListener, ChatInterface, IConstants{
 
-    JTextArea chatWindow;
-    JPanel jp;
-    JScrollPane jscroll;
-    JButton enterButton;
-    JTextField enterText;
-    JButton registerButton;
-    JButton reloadServer;
+    private JTextArea chatWindow;
+    private JPanel jp;
+    private JScrollPane jscroll;
+    private JButton enterButton;
+    private JTextField enterText;
+    private JButton registerButton;
+    private JButton reloadServer;
 
 
     private static RegisterWindow registerWindow;
 
-    Socket socket;
-    PrintWriter writer;
-    BufferedReader reader;
-    boolean isAuthorized;
-    SimpleDateFormat simpleDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss", Locale.getDefault());
-    String date;
+    private Socket socket;
+    private PrintWriter writer;
+    private BufferedReader reader;
+    private boolean isAuthorized;
+    private SimpleDateFormat simpleDate = new SimpleDateFormat("dd.MM.yy HH:mm:ss", Locale.getDefault());
+    private String date;
 
     public static void main(String[] args) {
         new Chat();
@@ -93,7 +93,7 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
         connect();
     }
 
-    public void connect(){
+    void connect(){
         try{
             socket = new Socket(SERVER_ADDR, SERVER_PORT);
             writer = new PrintWriter(socket.getOutputStream());
@@ -107,7 +107,7 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
         isAuthorized = false;
     }
 
-    public class ServerListener implements  Runnable{
+    class ServerListener implements  Runnable{
         String message;
 
         public void run(){
@@ -142,20 +142,20 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
     }
 
     ///авторизовать пользователя
-     public void joinToChatAuthorized(String login, String password){
+     void joinToChatAuthorized(String login, String password){
         writer.println(AUTH_SIGN + " " + login + " " + password);
         writer.flush();
 
     }
 
     ///создание нового пользователя
-    public void joinToChatcreateUser(String login, String password){
+    void joinToChatcreateUser(String login, String password){
         writer.println(CREAT_USER + " " + login + " " + password);
         writer.flush();
     }
 
     //открыть историю сообщений
-    void openFile(){
+    private void openFile(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("History.txt"));
             String line;
@@ -169,7 +169,7 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
     }
 
     ////создать файл истории сообщений
-    void creatFile(String str){
+    private void creatFile(String str){
         String string = str;
         try{
             FileOutputStream fos = new FileOutputStream("History.txt", true);

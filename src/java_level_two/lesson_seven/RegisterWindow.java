@@ -10,15 +10,15 @@ import java.awt.event.ActionListener;
  */
 public class RegisterWindow extends JFrame implements ChatInterface, ActionListener{
 
-    private final Chat chat;
-    JRadioButton authorized = new JRadioButton("Authorized", true);
-    JRadioButton create = new JRadioButton("Create new user");
-    ButtonGroup btngrp = new ButtonGroup();
-    JTextField login;
-    JTextField psswrd;
-    JLabel log;
-    JLabel passw;
-    JButton btnOk = new JButton("Ok, lets chat");
+    private Chat chat;
+    private JRadioButton authorized = new JRadioButton("Authorized", true);
+    private JRadioButton create = new JRadioButton("Create new user");
+    private ButtonGroup btngrp = new ButtonGroup();
+    private JTextField login;
+    private JTextField psswrd;
+    private JLabel log;
+    private JLabel passw;
+    private JButton btnOk = new JButton("Ok, lets chat");
 
 
     public RegisterWindow(Chat chat){
@@ -42,7 +42,7 @@ public class RegisterWindow extends JFrame implements ChatInterface, ActionListe
         letsChat();
     }
 
-    void addButtons(){
+    private void addButtons(){
         add(new JLabel("Create new user or authorized"));
         btngrp.add(authorized);
         btngrp.add(create);
@@ -50,7 +50,7 @@ public class RegisterWindow extends JFrame implements ChatInterface, ActionListe
         add(create);
     }
 
-    void addFields(){
+    private void addFields(){
         log = new JLabel("Enter the login");
         passw = new JLabel("Enter the password");
         login = new JTextField();
@@ -63,7 +63,7 @@ public class RegisterWindow extends JFrame implements ChatInterface, ActionListe
     }
 
 
-    void letsChat(){
+    private void letsChat(){
         if(authorized.isSelected()) chat.joinToChatAuthorized(login.getText(), psswrd.getText());
         else chat.joinToChatcreateUser(login.getText(), psswrd.getText());
         login.setText("");
