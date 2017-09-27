@@ -119,10 +119,14 @@ public class Chat extends JFrame implements ActionListener, ChatInterface, ICons
                     if(!message.equals("\0") && isAuthorized)
                         chatWindow.append(date = simpleDate.format(new Date()) + "  " + message + "\n");
                         creatFile( date = simpleDate.format(new Date()) + "  " + message + "\n");
-                    if(message.equals(AUTH_FAIL))
+                    if(message.equals(AUTH_FAIL)){
                         chatWindow.append(AUTH_FAIL + "\n" + NEW_CONNECT);
-                    if(message.equals(WRONG_USERNAME))
+                        socket.close();
+                    }
+                    if(message.equals(WRONG_USERNAME)) {
                         chatWindow.append(WRONG_USERNAME + "\n" + NEW_CONNECT);
+                        socket.close();
+                    }
                 }
             }catch (Exception e){
             }
